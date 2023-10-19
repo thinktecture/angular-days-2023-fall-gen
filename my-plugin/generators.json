@@ -4,6 +4,11 @@
       "factory": "./src/generators/my-generator/generator",
       "schema": "./src/generators/my-generator/schema.json",
       "description": "my-generator generator"
+    },
+    "my-step": {
+      "factory": "./src/generators/my-step/generator",
+      "schema": "./src/generators/my-step/schema.json",
+      "description": "my-step generator"
     }
   }
 }
