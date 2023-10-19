@@ -1,25 +1,17 @@
-import {
-  addProjectConfiguration,
-  formatFiles,
-  generateFiles,
-  Tree,
-} from '@nx/devkit';
-import * as path from 'path';
-import { MyGeneratorGeneratorSchema } from './schema';
+import {applicationGenerator} from "@nx/angular/generators";
+import {Tree} from '@nx/devkit';
+import {MyGeneratorGeneratorSchema} from './schema';
 
 export async function myGeneratorGenerator(
   tree: Tree,
   options: MyGeneratorGeneratorSchema
 ) {
-  const projectRoot = `libs/${options.name}`;
-  addProjectConfiguration(tree, options.name, {
-    root: projectRoot,
-    projectType: 'library',
-    sourceRoot: `${projectRoot}/src`,
-    targets: {},
+  await applicationGenerator(tree, {
+    name: options.name,
+    routing: true,
+    prefix: options.name,
+    style: 'scss'
   });
-  generateFiles(tree, path.join(__dirname, 'files'), projectRoot, options);
-  await formatFiles(tree);
 }
 
 export default myGeneratorGenerator;
