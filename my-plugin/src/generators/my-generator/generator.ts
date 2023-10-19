@@ -1,5 +1,5 @@
 import {applicationGenerator} from "@nx/angular/generators";
-import {Tree} from '@nx/devkit';
+import {generateFiles, joinPathFragments, readProjectConfiguration, Tree} from '@nx/devkit';
 import {MyGeneratorGeneratorSchema} from './schema';
 
 export async function myGeneratorGenerator(
@@ -12,6 +12,11 @@ export async function myGeneratorGenerator(
     prefix: options.name,
     style: 'scss'
   });
+
+  const sourceDir = joinPathFragments(__dirname, 'files');
+  const projectDir = readProjectConfiguration(tree, options.name).root;
+  const destinationDir = joinPathFragments(projectDir, 'src', 'app');
+  generateFiles(tree, sourceDir, destinationDir, {});
 }
 
 export default myGeneratorGenerator;
